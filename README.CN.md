@@ -76,32 +76,28 @@ git_repo/
 - **磁盘空间**：原始数据 ~150 GB（教程自身产物已精简）
 - **内存**：建议 ≥64 GB（小基因组 ≤32 GB 够用）
 
-### 必需 conda 环境
+### 必需软件
 
-| 环境 | 用途 | 关键工具 |
+教程流水线使用以下核心工具：
+
+| 工具 | 版本 | 用途 |
 | --- | --- | --- |
-| `genome_assembly` | 主流程 | minimap2、samtools、liftoff、yahs、bwa、quast、bandage |
-| `busco` | BUSCO 评估 | busco、hmmsearch、prodigal |
-| `RNA-seq` | 注释辅助 | gffread |
-| `old_base` | 通用 | aria2c、Rscript、juicer_tools |
+| minimap2 | 2.31 | 长读比对、PAF 生成 |
+| samtools | 1.19 | BAM/SAM 处理、排序、去重 |
+| bwa | 0.7.17 | 短读比对（Hi-C） |
+| yahs | 1.2.2 | Hi-C 挂载 |
+| juicer_tools | 2.20.00 | Hi-C 热图（.hic 文件生成） |
+| liftoff | 1.1.3 | 参考转移注释 |
+| gffread | 0.12.7 | CDS 提取、蛋白翻译 |
+| quast | 5.2.0 | 组装评估（连续性、准确性） |
+| busco | 6.1.0 | 组装完整性评估 |
+| nextDenovo | latest | ONT 长读组装 |
+| nextPolish | 1.4.1 | 组装抛光 |
+| SPAdes / Canu / Flye / hifiasm / wtdbg2 / MECAT2 / NECAT | latest | 其他组装器（用于对比） |
+| BioPython | latest | 线粒体密码子表翻译 |
+| dotPlotly | latest | 共线性可视化 |
 
-### 关键变量
-
-脚本中的路径全部使用 **可移植的环境变量**，无需硬编码：
-
-```bash
-REPO_ROOT=${REPO_ROOT:-$(pwd)}        # 教程项目根目录
-CONDA_PREFIX=${CONDA_PREFIX:-}        # genome_assembly 环境
-BUSCO_BIN=${BUSCO_BIN:-}              # busco 环境 bin
-BUSCO_ENV=${BUSCO_ENV:-}              # busco 环境根
-RNA_SEQ_BIN=${RNA_SEQ_BIN:-}          # RNA-seq 环境 bin
-RNA_SEQ_ENV=${RNA_SEQ_ENV:-}          # RNA-seq 环境根
-DATA_ROOT=${DATA_ROOT:-}              # 数据存放根（Download 工具等）
-MINIFORGE3=${MINIFORGE3:-}            # miniforge 安装根
-HOME=${HOME}                          # 用户 home
-```
-
-实际使用时请**激活对应 conda 环境**或**显式 export 这些变量**。
+**安装方式**：每个工具可通过 conda 安装（如 `conda install -c bioconda <tool>`）或从源码编译。教程不依赖特定的 conda 环境结构，根据需要自行调整。
 
 ---
 
@@ -168,20 +164,7 @@ HOME=${HOME}                          # 用户 home
 
 ## 🔧 工具版本
 
-教程使用的工具版本（其他版本可能也兼容）：
-
-| 工具 | 版本 | conda 环境 |
-| --- | --- | --- |
-| BUSCO | 6.1.0 | busco |
-| Liftoff | 1.1.3 | genome_assembly |
-| NextPolish | 1.4.1 | - |
-| minimap2 | 2.31 | genome_assembly |
-| samtools | 1.19 | genome_assembly |
-| bwa | 0.7.17 | - |
-| yahs | 1.2.2 | - |
-| quast | 5.2.0 | genome_assembly |
-| R | 4.5.1 | old_base |
-| gffread | 0.12.7 | RNA-seq |
+完整工具列表及版本见上方**必需软件**节。所有工具均为开源，可根据需要锁定版本以保证可复现性。
 
 ---
 

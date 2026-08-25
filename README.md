@@ -84,32 +84,28 @@ nextDenovo ONT → NextPolish → Hi-C → reference-guided reordering → annot
 - **Disk**: ~150 GB raw data (tutorial outputs already slimmed)
 - **RAM**: ≥64 GB recommended (≤32 GB works for small genomes)
 
-### Required conda environments
+### Required Software
 
-| Environment | Purpose | Key tools |
+The pipeline uses the following core tools:
+
+| Tool | Version | Purpose |
 | --- | --- | --- |
-| `genome_assembly` | Main pipeline | minimap2, samtools, liftoff, yahs, bwa, quast, bandage |
-| `busco` | BUSCO evaluation | busco, hmmsearch, prodigal |
-| `RNA-seq` | Annotation helper | gffread |
-| `old_base` | General utilities | aria2c, Rscript, juicer_tools |
+| minimap2 | 2.31 | Long-read alignment, PAF generation |
+| samtools | 1.19 | BAM/SAM processing, sorting, deduplication |
+| bwa | 0.7.17 | Short-read alignment (Hi-C) |
+| yahs | 1.2.2 | Hi-C scaffolding |
+| juicer_tools | 2.20.00 | Hi-C contact map (.hic file generation) |
+| liftoff | 1.1.3 | Reference-transfer annotation |
+| gffread | 0.12.7 | CDS extraction, protein translation |
+| quast | 5.2.0 | Assembly evaluation (continuity, accuracy) |
+| busco | 6.1.0 | Assembly completeness evaluation |
+| nextDenovo | latest | ONT long-read assembly |
+| nextPolish | 1.4.1 | Assembly polishing |
+| SPAdes / Canu / Flye / hifiasm / wtdbg2 / MECAT2 / NECAT | latest | Alternative assemblers (for comparison) |
+| BioPython | latest | Mitochondrial codon table translation |
+| dotPlotly | latest | Synteny visualization |
 
-### Key Environment Variables
-
-All script paths use **portable environment variables** — no hardcoded paths:
-
-```bash
-REPO_ROOT=${REPO_ROOT:-$(pwd)}        # Tutorial project root
-CONDA_PREFIX=${CONDA_PREFIX:-}        # genome_assembly env
-BUSCO_BIN=${BUSCO_BIN:-}              # busco env bin
-BUSCO_ENV=${BUSCO_ENV:-}              # busco env root
-RNA_SEQ_BIN=${RNA_SEQ_BIN:-}          # RNA-seq env bin
-RNA_SEQ_ENV=${RNA_SEQ_ENV:-}          # RNA-seq env root
-DATA_ROOT=${DATA_ROOT:-}              # Data root (Download tools etc.)
-MINIFORGE3=${MINIFORGE3:-}            # miniforge install root
-HOME=${HOME}                          # User home
-```
-
-In practice, **activate the relevant conda environment** or **explicitly export these variables** before running scripts.
+**Installation**: Each tool can be installed via conda (`conda install -c bioconda <tool>`) or built from source. The tutorial does not assume any specific conda environment structure — adapt as needed.
 
 ---
 
@@ -176,20 +172,7 @@ See Section 6.2 of the tutorial PDF for detailed download links.
 
 ## 🔧 Tool Versions
 
-Tool versions used in this tutorial (other versions may also work):
-
-| Tool | Version | conda env |
-| --- | --- | --- |
-| BUSCO | 6.1.0 | busco |
-| Liftoff | 1.1.3 | genome_assembly |
-| NextPolish | 1.4.1 | - |
-| minimap2 | 2.31 | genome_assembly |
-| samtools | 1.19 | genome_assembly |
-| bwa | 0.7.17 | - |
-| yahs | 1.2.2 | - |
-| quast | 5.2.0 | genome_assembly |
-| R | 4.5.1 | old_base |
-| gffread | 0.12.7 | RNA-seq |
+See the **Required Software** section above for the complete tool list with versions. All tools are open-source; pin versions as needed for reproducibility.
 
 ---
 
