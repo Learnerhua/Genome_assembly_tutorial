@@ -1,0 +1,7 @@
+#!/bin/bash
+set -xveo pipefail
+hostname
+cd ${REPO_ROOT}/15.nextpolish/05.kmer_count/01.merge.ref.sh.work/merge_ref1
+(  cat ${REPO_ROOT}/15.nextpolish/04.score_chain/05.polish.ref.sh.work/polish_genome1/genome.nextpolish.part000.fasta ${REPO_ROOT}/15.nextpolish/04.score_chain/05.polish.ref.sh.work/polish_genome2/genome.nextpolish.part001.fasta ${REPO_ROOT}/15.nextpolish/04.score_chain/05.polish.ref.sh.work/polish_genome3/genome.nextpolish.part002.fasta ${REPO_ROOT}/15.nextpolish/04.score_chain/05.polish.ref.sh.work/polish_genome4/genome.nextpolish.part003.fasta ${REPO_ROOT}/15.nextpolish/04.score_chain/05.polish.ref.sh.work/polish_genome5/genome.nextpolish.part004.fasta ${REPO_ROOT}/15.nextpolish/04.score_chain/05.polish.ref.sh.work/polish_genome6/genome.nextpolish.part005.fasta ${REPO_ROOT}/15.nextpolish/04.score_chain/05.polish.ref.sh.work/polish_genome7/genome.nextpolish.part006.fasta ${REPO_ROOT}/15.nextpolish/04.score_chain/05.polish.ref.sh.work/polish_genome8/genome.nextpolish.part007.fasta > ${REPO_ROOT}/15.nextpolish/05.kmer_count/input.genome.fasta )
+touch ${REPO_ROOT}/15.nextpolish/05.kmer_count/01.merge.ref.sh.work/merge_ref1/merge_ref.sh.done
+
